@@ -1,0 +1,23 @@
+{
+  "name": "ldaservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app",
+    "migrate": "cd  db && knex migrate:latest && cd ..",
+    "migrate_start": "npm run migrate && npm start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.15",
+    "lda": "^0.2.0",
+    "lodash": "^4.17.20",
+    "node-schedule": "^1.3.2",
+    "pg": "^8.5.1"
+  }
+}
