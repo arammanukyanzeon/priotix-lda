@@ -5,7 +5,8 @@ const conf = {
       database: 'priotix',
       user: 'postgres',
       port: 5433,
-      password: 'qwerty1'
+      password: 'qwerty1',
+      host: 'priotix'
     },
     pool: {
       min: 2,
