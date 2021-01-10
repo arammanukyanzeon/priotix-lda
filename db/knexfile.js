@@ -4,6 +4,7 @@ const conf = {
     connection: {
       database: 'priotix',
       user: 'postgres',
+      port: 5433,
       password: 'qwerty1'
     },
     pool: {
@@ -20,6 +21,7 @@ const conf = {
       database: 'priotix',
       user: 'postgres',
       password: 'qwerty1',
+      port: 5433,
       host: 'priotix'
     },
     pool: {
