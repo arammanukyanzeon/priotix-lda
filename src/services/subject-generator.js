@@ -1,7 +1,8 @@
 import lda from 'lda';
-import { getActiveTopic, getTweets, addTopicTerms } from '../model/lda.model.js'
 import _ from 'lodash';
 import moment from 'moment';
+
+import { Topic, Tweet, Subject } from '../models/index.js';
 
 function cleanText(text, topic) {
     const regExps = [
@@ -17,12 +18,12 @@ function cleanText(text, topic) {
         text = text.replace(regExp, '');
     });
     return text;
-} 
+}
 
 export async function getTopicWords() {
-    const topics = await getActiveTopic();
+    const topics = await Topic.getActive();
     const ids = topics.map(topic => topic.id);
-    const tweets = await getTweets(ids);
+    const tweets = await Tweet.get(ids);
     const groupedTweets = _.groupBy(tweets, 'topic_id');
     _.map(groupedTweets, (tweets, topic_id) => {
         const topic = _.find(topics, (topic) => topic.id == topic_id);
@@ -41,7 +42,7 @@ export async function getTopicWords() {
                 data.term = result.map(r => r.term).join(' ');
                 result.forEach(r => data.probability += r.probability);
     
-                addTopicTerms(data, topic.id, date);
+                Subject.add(data, topic.id, date);
             })
         });
     })
