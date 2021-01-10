@@ -1,12 +1,11 @@
-const conf = {
+module.exports = {
   development: {
     client: 'postgres',
     connection: {
       database: 'priotix',
       user: 'postgres',
       port: 5432,
-      password: 'qwerty1',
-      host: 'priotix'
+      password: 'qwerty1'
     },
     pool: {
       min: 2,
@@ -34,4 +33,3 @@ const conf = {
     }
   }
 };
-export default conf;
