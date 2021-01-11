@@ -1,4 +1,5 @@
 import knex from "../../db/db.js";
+import moment from "moment";
 
 const tableName = 'topic_terms';
 
