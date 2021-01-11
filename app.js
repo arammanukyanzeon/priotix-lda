@@ -2,9 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { scheduleJob } from 'node-schedule';
 import dotenv from 'dotenv';
-import { getTopicWords } from './src/services/subject-generator.js';
-import Topic from './src/models/topic.js';
 
+import { getTopicWords } from './src/services/subject-generator.js';
 import subjectRoutes from './src/routes/subject.js';
 
 dotenv.config();
@@ -21,7 +20,6 @@ class Server {
         scheduleJob('*/1 * * * *', () => {
             getTopicWords();
         });
-        Topic.getActive();
     }
 
     config() {
