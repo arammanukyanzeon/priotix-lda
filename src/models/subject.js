@@ -3,15 +3,29 @@ import knex from "../../db/db.js";
 const tableName = 'topic_terms';
 
 const model = {
-    async add(data, topicID, date) {
-        await knex(tableName)
-            .insert({
+    async upsert(data, topicID, day) {
+        const [topic] = await this.getByTopic(topicID);
+
+        if (topic) {
+            console.log("updating to ", data, topicID, day);
+            await knex(tableName)
+            .update({
                 term: data.term,
                 probability: data.probability,
-                topic_id: topicID,
-                created_at: date
             })
-            .returning("*");
+            .where('topic_id', topicID)
+            .whereRaw(`date(created_at) = '${day}'`);
+        } else {
+            const date = moment(day).utc().format()
+            await knex(tableName)
+                .insert({
+                    term: data.term,
+                    probability: data.probability,
+                    topic_id: topicID,
+                    created_at: date
+                })
+                .returning("*");
+        }
     },
 
     async getByTopic(topicID) {

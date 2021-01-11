@@ -1,10 +1,10 @@
 import knex from "../../db/db.js";
 
-const tableName = 'topic_terms';
+const tableName = 'topic_last_ids';
 
 const model = {
     async upsert(id, topicID) {
-        const [topic] = await getByTopic(topicID);
+        const [topic] = await this.getByTopic(topicID);
 
         if (topic) {
             await knex(tableName)
