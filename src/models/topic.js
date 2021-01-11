@@ -1,9 +1,17 @@
 import fetch from 'node-fetch';
 
+const address = process.env.TWITTER_SERVICE_ADDRESS;
+
 const model = {
     async getActive() {
-        const response = await fetch('http://localhost:8080/topic/');
-        const data = await response.json();
+        let data = [];
+
+        try {
+            const response = await fetch(`http://${address}/topic/`);
+            data = await response.json();
+        } catch (err) {
+            console.log(`Error: ${err.message}`);
+        }
         
         return data;
     },

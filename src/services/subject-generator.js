@@ -22,8 +22,10 @@ function cleanText(text, topic) {
 
 export async function getTopicWords() {
     const topics = await Topic.getActive();
+    if (!topics.length) return;
     const ids = topics.map(topic => topic.id);
     const tweets = await Tweet.get(ids);
+    if (!tweets.length) return;
     const groupedTweets = _.groupBy(tweets, 'topic_id');
     _.map(groupedTweets, (tweets, topic_id) => {
         const topic = _.find(topics, (topic) => topic.id == topic_id);
